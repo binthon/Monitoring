@@ -1,10 +1,19 @@
+
+volumes:
+  grafana-data:
+  victoria-metrics-data:
+  
 services:
   victoriametrics:
     image: victoriametrics/victoria-metrics:latest
+    container_name: victoriametrics
     ports:
       - "8428:8428"
+    volumes:
+      - /opt/victoria-metrics-data:/victoria-metrics-data
+    command:
+      - -retentionPeriod=12
     restart: unless-stopped
-
 
   grafana:
     image: grafana/grafana
@@ -22,10 +31,11 @@ services:
       - victoriametrics
     volumes:
       - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - ./telegraf.d:/etc/telegraf/telegraf.d:ro
+    command: --config /etc/telegraf/telegraf.conf --config-directory /etc/telegraf/telegraf.d
     restart: unless-stopped
     cap_add:
       - NET_RAW
       - NET_ADMIN
 
-volumes:
-  grafana-data:
+
