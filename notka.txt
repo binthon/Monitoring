@@ -1,0 +1,71 @@
+[[inputs.snmp]]
+  agents = [ "192.168.1.22" ]
+  version = 2
+  community = "public"
+  name = "mikrotik"
+
+  [[inputs.snmp.field]]
+    name = "ifInOctets_ether3"
+    oid = "1.3.6.1.2.1.2.2.1.10.3"
+
+  [[inputs.snmp.field]]
+    name = "ifOutOctets_ether3"
+    oid = "1.3.6.1.2.1.2.2.1.16.3"
+
+  [[inputs.snmp.field]]
+    name = "ifInOctets_wlan1"
+    oid = "1.3.6.1.2.1.2.2.1.10.6"
+
+  [[inputs.snmp.field]]
+    name = "used_memory"
+    oid = ".1.3.6.1.2.1.25.2.3.1.6.65536"
+
+  [[inputs.snmp.field]]
+    name = "total_memory"
+    oid = ".1.3.6.1.2.1.25.2.3.1.5.65536"
+
+  [[inputs.snmp.field]]
+    name = "uptime_seconds"
+    oid = ".1.3.6.1.2.1.1.3.0"
+
+  [[inputs.snmp.field]]
+    name = "cpu_frequency"
+    oid = ".1.3.6.1.4.1.14988.1.1.3.14.0"
+
+  [[inputs.snmp.field]]
+    name = "build_time"
+    oid = ".1.3.6.1.4.1.14988.1.1.7.6.0"
+  
+  [[inputs.snmp.field]]
+  name = "dhcp_lease"
+  oid  = "1.3.6.1.4.1.14988.1.1.6.1.0"
+
+  [[inputs.snmp.field]]
+  name = "noise_floor_wlan1"
+  oid = ".1.3.6.1.4.1.14988.1.1.1.3.1.9.6"
+
+  [[inputs.snmp.field]]
+  name = "noise_floor_wlan2"
+  oid = ".1.3.6.1.4.1.14988.1.1.1.3.1.9.7"
+
+  [[inputs.snmp.table]]
+    name = "arp_table"
+    oid = "1.3.6.1.2.1.4.22.1"
+
+    [[inputs.snmp.table.field]]
+        name = "ifIndex"
+        oid = "1.3.6.1.2.1.4.22.1.1"
+
+    [[inputs.snmp.table.field]]
+        name = "physAddr"
+        oid = "1.3.6.1.2.1.4.22.1.2"
+
+    [[inputs.snmp.table.field]]
+        name = "ipAddr"
+        oid = "1.3.6.1.2.1.4.22.1.3"
+
+    [[inputs.snmp.table.field]]
+        name = "arpType"
+        oid = "1.3.6.1.2.1.4.22.1.4"
+
+
