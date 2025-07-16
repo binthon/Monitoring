@@ -1,10 +1,12 @@
+volumes:
+  grafana-data:
+
 services:
   victoriametrics:
     image: victoriametrics/victoria-metrics:latest
     ports:
       - "8428:8428"
     restart: unless-stopped
-
 
   grafana:
     image: grafana/grafana
@@ -25,7 +27,4 @@ services:
     restart: unless-stopped
     cap_add:
       - NET_RAW
-      - NET_ADMIN
-
-volumes:
-  grafana-data:
+      - NET_ADMIN 
