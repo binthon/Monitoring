@@ -1,11 +1,16 @@
 volumes:
   grafana-data:
+  grafana-provisioning:   
+  vm-data:               
 
 services:
   victoriametrics:
     image: victoriametrics/victoria-metrics:latest
+    container_name: victoriametrics
     ports:
       - "8428:8428"
+    volumes:
+      - vm-data:/storage     
     restart: unless-stopped
 
   grafana:
@@ -14,12 +19,15 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - grafana-data:/var/lib/grafana
+      - grafana-data:/var/lib/grafana                  
+      - grafana-provisioning:/etc/grafana/provisioning 
     restart: unless-stopped
-  
+
   telegraf:
     image: telegraf:latest
     container_name: telegraf
+    env_file:
+      - .env
     depends_on:
       - victoriametrics
     volumes:
@@ -27,4 +35,4 @@ services:
     restart: unless-stopped
     cap_add:
       - NET_RAW
-      - NET_ADMIN 
+      - NET_ADMIN
