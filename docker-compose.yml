@@ -24,15 +24,22 @@ services:
     restart: unless-stopped
 
   telegraf:
-    image: telegraf:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - MIBS=all
     container_name: telegraf
     env_file:
       - .env
     depends_on:
       - victoriametrics
+    command: --config /etc/telegraf/telegraf.conf --config-directory /etc/telegraf/telegraf.d
     volumes:
       - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - ./telegraf.d:/etc/telegraf/telegraf.d:ro
     restart: unless-stopped
     cap_add:
       - NET_RAW
       - NET_ADMIN
+
