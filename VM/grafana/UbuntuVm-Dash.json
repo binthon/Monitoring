@@ -24,7 +24,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cerhrdsr6x9fke"
+        "uid": "des4htlxa00e8f"
       },
       "fieldConfig": {
         "defaults": {
@@ -100,7 +100,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cerhrdsr6x9fke"
+        "uid": "des4htlxa00e8f"
       },
       "fieldConfig": {
         "defaults": {
@@ -191,7 +191,8 @@
     },
     {
       "datasource": {
-        "uid": "cerhrdsr6x9fke"
+        "type": "prometheus",
+        "uid": "des4htlxa00e8f"
       },
       "fieldConfig": {
         "defaults": {
@@ -379,7 +380,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cerhrdsr6x9fke"
+        "uid": "des4htlxa00e8f"
       },
       "fieldConfig": {
         "defaults": {
@@ -482,7 +483,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cerhrdsr6x9fke"
+        "uid": "des4htlxa00e8f"
       },
       "fieldConfig": {
         "defaults": {
@@ -627,7 +628,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "cerhrdsr6x9fke"
+        "uid": "des4htlxa00e8f"
       },
       "fieldConfig": {
         "defaults": {
@@ -711,8 +712,8 @@
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 0,
-        "y": 24
+        "x": 12,
+        "y": 16
       },
       "id": 2,
       "options": {
@@ -756,5 +757,5 @@
   "timezone": "browser",
   "title": "UbuntuVM",
   "uid": "23ae86e6-e8f7-4df6-99dc-b836795510aa",
-  "version": 16
+  "version": 2
 }
