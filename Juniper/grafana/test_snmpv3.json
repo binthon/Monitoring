@@ -487,7 +487,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 5,
+        "w": 4,
         "x": 3,
         "y": 19
       },
@@ -551,8 +551,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 6,
-        "x": 8,
+        "w": 4,
+        "x": 7,
         "y": 19
       },
       "id": 1,
@@ -598,7 +598,40 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -619,28 +652,29 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 5,
-        "x": 14,
+        "w": 7,
+        "x": 11,
         "y": 19
       },
       "id": 20,
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
+        "legend": {
           "calcs": [
-            "last"
+            "last",
+            "min",
+            "max",
+            "mean",
+            "range"
           ],
-          "fields": "",
-          "values": false
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
         },
-        "showPercentChange": true,
-        "text": {},
-        "textMode": "auto",
-        "wideLayout": false
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
       },
       "pluginVersion": "12.0.2",
       "targets": [
@@ -654,7 +688,7 @@
         }
       ],
       "title": "CPU USAGE %",
-      "type": "stat"
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -666,17 +700,54 @@
           "color": {
             "mode": "palette-classic"
           },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
           "fieldMinMax": false,
           "mappings": [],
           "thresholds": {
-            "mode": "absolute",
+            "mode": "percentage",
             "steps": [
               {
                 "color": "green"
               },
               {
+                "color": "#EAB839",
+                "value": 200
+              },
+              {
                 "color": "red",
-                "value": 80
+                "value": 300
               }
             ]
           },
@@ -686,28 +757,28 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 5,
-        "x": 19,
+        "w": 6,
+        "x": 18,
         "y": 19
       },
       "id": 21,
       "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
+        "legend": {
           "calcs": [
-            "last"
+            "last",
+            "min",
+            "max",
+            "mean"
           ],
-          "fields": "",
-          "limit": 5,
-          "values": false
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
         },
-        "showPercentChange": true,
-        "textMode": "auto",
-        "wideLayout": true
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
       },
       "pluginVersion": "12.0.2",
       "targets": [
@@ -720,7 +791,7 @@
         }
       ],
       "title": "psu0 output power",
-      "type": "stat"
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -1445,12 +1516,12 @@
     "list": []
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "JUNIPER",
   "uid": "00ae6838-ec44-4b56-bcb3-9e9852485170",
-  "version": 71
+  "version": 74
 }
