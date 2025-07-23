@@ -1,0 +1,144 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 2,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cesswo3730mbkc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "1": {
+                  "color": "dark-red",
+                  "index": 0,
+                  "text": "IDLE"
+                },
+                "2": {
+                  "color": "dark-orange",
+                  "index": 1,
+                  "text": "CONNECT"
+                },
+                "3": {
+                  "color": "dark-yellow",
+                  "index": 2,
+                  "text": "ACTIVE"
+                },
+                "4": {
+                  "color": "semi-dark-purple",
+                  "index": 3,
+                  "text": "OPEN_SENT"
+                },
+                "5": {
+                  "color": "semi-dark-blue",
+                  "index": 4,
+                  "text": "OPEN_CONFIRM"
+                },
+                "6": {
+                  "color": "dark-green",
+                  "index": 5,
+                  "text": "ESTABLISHED"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 11,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "cesswo3730mbkc"
+          },
+          "editorMode": "code",
+          "expr": "last_over_time(BGP_SESSION_STATE_session_state[5m])\r\n",
+          "interval": "5m",
+          "legendFormat": "{{neighbor_address}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "BGP STATUS SESSION",
+      "type": "stat"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Juniper_BGP",
+  "uid": "e3be4547-7f03-46dd-8812-d7bc295d34a7",
+  "version": 2
+}
