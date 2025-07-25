@@ -50,17 +50,258 @@
       "type": "library-panel-ref"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cesswo3730mbkc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "#EAB839",
+                "value": 200
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 19,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "BGP_STATE_neighbor_port",
+          "format": "time_series",
+          "legendFormat": "{{neighbor_address}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "MAX USED PORT BGP",
+      "transformations": [
+        {
+          "id": "formatTime",
+          "options": {
+            "outputFormat": "",
+            "timeField": "",
+            "useTimezone": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cesswo3730mbkc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "dateTimeAsIsoNoDateIfToday"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 9
+      },
+      "id": 20,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "BGP_STATE_last_established * 1000",
+          "legendFormat": "{{neighbor_address}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "LAST BGP ESTABLISHED",
+      "type": "stat"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 17
       },
       "id": 14,
       "panels": [],
       "title": "OPTICAL",
       "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cesswo3730mbkc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "dBm"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 13,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "min",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum by (name) (OPTICAL_POWER_input_power_instant)\r\n",
+          "legendFormat": "{{name}} in",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "TRANSMITER IN POWER",
+      "transformations": [
+        {
+          "id": "sortBy",
+          "options": {}
+        }
+      ],
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -120,15 +361,152 @@
           },
           "unit": "dBm"
         },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  " FPC0:PIC0:PORT0:Xcvr0 out",
+                  " FPC0:PIC0:PORT1:Xcvr0 out"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 24,
+        "x": 0,
+        "y": 31
+      },
+      "id": 21,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "min",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum by (name) (OPTICAL_POWER_output_power_instant)\r\n",
+          "legendFormat": "{{port_sortable}} {{name}} out",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "TRANSMITER OUT POWER",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 45
+      },
+      "id": 2,
+      "panels": [],
+      "title": "Interfaces",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "cesswo3730mbkc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bps"
+        },
         "overrides": []
       },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 10
+        "y": 46
       },
-      "id": 13,
+      "id": 3,
       "options": {
         "legend": {
           "calcs": [],
@@ -145,28 +523,21 @@
       "pluginVersion": "12.0.2",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "cesswo3730mbkc"
+          },
           "editorMode": "code",
-          "expr": "avg by(name) (OPTIC_physical_channels_channel_state_input_power_instant > -30\r\nand\r\nOPTIC_physical_channels_channel_state_output_power_instant > -10)\r\n\r\n",
-          "legendFormat": "__auto",
+          "expr": "topk(3, rate(INTERFACES_COUNTERS_in_octets{name=~\"^(et|lo).*\"}[1m]) * 8) \r\n",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{name}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "OPTICAL_COS JESzze nwm co ",
+      "title": "TOP 3 INTERFACE ET-* (IN)",
       "type": "timeseries"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 18
-      },
-      "id": 2,
-      "panels": [],
-      "title": "Interfaces",
-      "type": "row"
     },
     {
       "datasource": {
@@ -256,132 +627,8 @@
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 0,
-        "y": 19
-      },
-      "id": 3,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.0.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "cesswo3730mbkc"
-          },
-          "editorMode": "code",
-          "expr": "topk(3, rate(INTERFACES_in_octets{name=~\"^(et|lo).*\"}[1m]) * 8)\r\n",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "{{name}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "TOP 3 INTERFACE ET-* (IN)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "cesswo3730mbkc"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bps"
-        },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "et-0/0/1"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
         "x": 12,
-        "y": 19
+        "y": 46
       },
       "id": 1,
       "options": {
@@ -405,7 +652,7 @@
             "uid": "cesswo3730mbkc"
           },
           "editorMode": "code",
-          "expr": "topk(3, rate(INTERFACES_out_octets{name=~\"^(et|lo).*\"}[1m]) * 8)\r\n",
+          "expr": "topk(3, rate(INTERFACES_COUNTERS_out_octets{name=~\"^(et|lo).*\"}[1m]) * 8) \r\n",
           "legendFormat": "{{name}}",
           "range": true,
           "refId": "A"
@@ -503,7 +750,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 27
+        "y": 54
       },
       "id": 16,
       "options": {
@@ -621,7 +868,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 27
+        "y": 54
       },
       "id": 8,
       "options": {
@@ -714,7 +961,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 35
+        "y": 62
       },
       "id": 15,
       "options": {
@@ -734,7 +981,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "topk(3, rate(INTERFACES_in_octets{name=~\"^re.*\"}[1m]) * 8)\r\n",
+          "expr": "topk(3, rate(INTERFACES_COUNTERS_in_octets{name=~\"^re.*\"}[1m]) * 8) \r\n",
           "hide": false,
           "legendFormat": "{{name}}",
           "range": true,
@@ -750,7 +997,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 43
+        "y": 70
       },
       "id": 6,
       "panels": [],
@@ -821,7 +1068,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 44
+        "y": 71
       },
       "id": 4,
       "options": {
@@ -913,7 +1160,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 44
+        "y": 71
       },
       "id": 11,
       "options": {
@@ -933,7 +1180,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "100 * COMPONENT_STATE_memory_utilized / (COMPONENT_STATE_memory_available + COMPONENT_STATE_memory_utilized)\r\n",
+          "expr": "100 * avg by(instance) (\r\n  COMPONENT_STATE_memory_utilized\r\n) /\r\navg by(instance) (\r\n  COMPONENT_STATE_memory_available + COMPONENT_STATE_memory_utilized\r\n)\r\n",
           "legendFormat": "ram %",
           "range": true,
           "refId": "A"
@@ -1006,7 +1253,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 52
+        "y": 79
       },
       "id": 12,
       "options": {
@@ -1026,7 +1273,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "COMPONENT_STATE_used_power{name=~\"^PSM.*\"}\r\n",
+          "expr": "sum by (name) (COMPONENT_STATE_used_power{name=~\"^PSM.*\"})\r\n",
           "legendFormat": "{{name}}",
           "range": true,
           "refId": "A"
@@ -1041,104 +1288,12 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 60
+        "y": 87
       },
       "id": 10,
       "panels": [],
       "title": "QUEUE",
       "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "cesswo3730mbkc"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 61
-      },
-      "id": 9,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.0.2",
-      "targets": [
-        {
-          "editorMode": "code",
-          "expr": "QUEUE_queue_state_max_queue_len\r\n",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "New panel",
-      "type": "timeseries"
     }
   ],
   "preload": false,
@@ -1148,12 +1303,12 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Juniper-gNMI",
   "uid": "9d990666-2396-4a65-b4ba-b8a20e7c6aef",
-  "version": 27
+  "version": 57
 }
