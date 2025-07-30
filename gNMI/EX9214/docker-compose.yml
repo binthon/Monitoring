@@ -1,0 +1,44 @@
+version: "3.8"
+
+volumes:
+  grafana-data_gnmi:
+  grafana-provisioning_gnmi:
+  vm-data_gnmi:
+
+services:
+  victoriametrics:
+    image: victoriametrics/victoria-metrics:latest
+    container_name: victoriametrics_ex
+    ports:
+      - "8430:8428"
+    volumes:
+      - vm-data_gnmi:/storage
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana_gnmi_ex
+    ports:
+      - "3002:3000"
+    volumes:
+      - grafana-data_gnmi:/var/lib/grafana
+      - grafana-provisioning_gnmi:/etc/grafana/provisioning
+    depends_on:
+      - victoriametrics
+    restart: unless-stopped
+
+  telegraf:
+    image: telegraf:latest
+    container_name: telegraf_gnmi_ex
+    env_file:
+      - .env
+    depends_on:
+      - victoriametrics
+    command: --config /etc/telegraf/telegraf.conf --config-directory /etc/telegraf/telegraf.d
+    volumes:
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - ./telegraf.d:/etc/telegraf/telegraf.d:ro
+    restart: unless-stopped
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
