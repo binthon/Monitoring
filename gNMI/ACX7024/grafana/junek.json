@@ -1684,7 +1684,9 @@
               "options": {
                 "mode": "exclude",
                 "names": [
-                  "{interface_id=\"et-0/0/1\", name=\"3\"}"
+                  "{interface_id=\"et-0/0/0\", queue=\"0\"}",
+                  "{interface_id=\"et-0/0/0\", queue=\"3\"}",
+                  "{interface_id=\"et-0/0/1\", queue=\"0\"}"
                 ],
                 "prefix": "All except:",
                 "readOnly": true
@@ -1727,7 +1729,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum by (interface_id, name) (rate(QUEUE_STATE_queue_state_transmit_octets))*8",
+          "expr": "sum by (interface_id, queue) (rate(QUEUE_STATE_queue_state_transmit_octets))*8",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1801,7 +1803,7 @@
               "options": {
                 "mode": "exclude",
                 "names": [
-                  "{interface_id=\"et-0/0/1\", name=\"3\"}"
+                  "{interface_id=\"et-0/0/0\", queue=\"0\"}"
                 ],
                 "prefix": "All except:",
                 "readOnly": true
@@ -1844,7 +1846,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum by (interface_id, name) (rate(QUEUE_STATE_queue_state_transmit_pkts))",
+          "expr": "sum by (interface_id, queue) (rate(QUEUE_STATE_queue_state_transmit_pkts))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -1963,7 +1965,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum by (interface_id, name) (rate(QUEUE_STATE_queue_state_dropped_octets))*8",
+          "expr": "sum by (interface_id, queue) (rate(QUEUE_STATE_queue_state_dropped_octets))*8",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -2081,7 +2083,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum by (interface_id, name) (rate(QUEUE_STATE_queue_state_dropped_pkts))",
+          "expr": "sum by (interface_id, queue) (rate(QUEUE_STATE_queue_state_dropped_pkts))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -2116,5 +2118,5 @@
   "timezone": "browser",
   "title": "Juniper-gNMI",
   "uid": "9d990666-2396-4a65-b4ba-b8a20e7c6aef",
-  "version": 28
+  "version": 32
 }
