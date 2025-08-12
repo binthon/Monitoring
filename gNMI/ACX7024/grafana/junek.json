@@ -587,7 +587,9 @@
                 "mode": "exclude",
                 "names": [
                   "FPC0:PIC0:PORT0:Xcvr0 in",
-                  "FPC0:PIC0:PORT1:Xcvr0 in"
+                  "FPC0:PIC0:PORT1:Xcvr0 in",
+                  "FPC0:PIC0:PORT3:Xcvr0 in",
+                  "FPC0:PIC0:PORT2:Xcvr0 in"
                 ],
                 "prefix": "All except:",
                 "readOnly": true
@@ -775,12 +777,110 @@
       "type": "timeseries"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "fetlgfpqby800c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "dBm"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 46
+      },
+      "id": 36,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "min",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "(OPTICAL_FREQUENCY_input_power_instant{interface=\"$interface\"})\r\n",
+          "legendFormat": "lane {{lane}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "POWER BY LANE IN INTERFACE",
+      "type": "timeseries"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 46
+        "y": 58
       },
       "id": 2,
       "panels": [],
@@ -851,7 +951,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 47
+        "y": 59
       },
       "id": 3,
       "options": {
@@ -950,7 +1050,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 47
+        "y": 59
       },
       "id": 1,
       "options": {
@@ -1047,7 +1147,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 55
+        "y": 67
       },
       "id": 15,
       "options": {
@@ -1083,7 +1183,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 63
+        "y": 75
       },
       "id": 6,
       "panels": [],
@@ -1151,7 +1251,7 @@
         "h": 16,
         "w": 8,
         "x": 0,
-        "y": 64
+        "y": 76
       },
       "id": 25,
       "options": {
@@ -1300,7 +1400,7 @@
         "h": 8,
         "w": 16,
         "x": 8,
-        "y": 64
+        "y": 76
       },
       "id": 12,
       "options": {
@@ -1392,7 +1492,7 @@
         "h": 8,
         "w": 16,
         "x": 8,
-        "y": 72
+        "y": 84
       },
       "id": 11,
       "options": {
@@ -1485,7 +1585,7 @@
         "h": 8,
         "w": 17,
         "x": 0,
-        "y": 80
+        "y": 92
       },
       "id": 4,
       "options": {
@@ -1520,7 +1620,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 88
+        "y": 100
       },
       "id": 10,
       "panels": [],
@@ -1591,7 +1691,7 @@
         "h": 14,
         "w": 11,
         "x": 0,
-        "y": 89
+        "y": 101
       },
       "id": 27,
       "options": {
@@ -1716,7 +1816,7 @@
         "h": 14,
         "w": 13,
         "x": 11,
-        "y": 89
+        "y": 101
       },
       "id": 28,
       "options": {
@@ -1835,7 +1935,7 @@
         "h": 11,
         "w": 11,
         "x": 0,
-        "y": 103
+        "y": 115
       },
       "id": 30,
       "options": {
@@ -1953,7 +2053,7 @@
         "h": 11,
         "w": 13,
         "x": 11,
-        "y": 103
+        "y": 115
       },
       "id": 31,
       "options": {
@@ -1988,7 +2088,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 114
+        "y": 126
       },
       "id": 33,
       "panels": [],
@@ -2043,7 +2143,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 115
+        "y": 127
       },
       "id": 32,
       "options": {
@@ -2125,7 +2225,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 115
+        "y": 127
       },
       "id": 34,
       "options": {
@@ -2210,7 +2310,7 @@
         "h": 5,
         "w": 4,
         "x": 0,
-        "y": 123
+        "y": 135
       },
       "id": 35,
       "options": {
@@ -2298,16 +2398,40 @@
         "filters": [],
         "name": "Filters",
         "type": "adhoc"
+      },
+      {
+        "allValue": "All",
+        "current": {
+          "text": [
+            "et-0/0/0"
+          ],
+          "value": [
+            "et-0/0/0"
+          ]
+        },
+        "definition": "label_values(OPTICAL_FREQUENCY_input_power_instant,interface)",
+        "includeAll": true,
+        "multi": true,
+        "name": "interface",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(OPTICAL_FREQUENCY_input_power_instant,interface)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "^et-.*$",
+        "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Juniper-gNMI",
   "uid": "9d990666-2396-4a65-b4ba-b8a20e7c6aef",
-  "version": 44
+  "version": 61
 }
