@@ -755,9 +755,7 @@
                 "mode": "exclude",
                 "names": [
                   "FPC0:PIC0:PORT0:Xcvr0 in",
-                  "FPC0:PIC0:PORT1:Xcvr0 in",
-                  "FPC0:PIC0:PORT3:Xcvr0 in",
-                  "FPC0:PIC0:PORT2:Xcvr0 in"
+                  "FPC0:PIC0:PORT1:Xcvr0 in"
                 ],
                 "prefix": "All except:",
                 "readOnly": true
@@ -1021,7 +1019,9 @@
           ],
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": true,
+          "sortBy": "Max",
+          "sortDesc": true
         },
         "tooltip": {
           "hideZeros": false,
@@ -1113,7 +1113,32 @@
           },
           "unit": "bps"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "et-0/0/0"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -1220,7 +1245,7 @@
               "options": {
                 "mode": "exclude",
                 "names": [
-                  "et-0/0/2"
+                  "et-0/0/0"
                 ],
                 "prefix": "All except:",
                 "readOnly": true
@@ -1908,32 +1933,7 @@
           },
           "unit": "Bps"
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "et-0/0/3 queue 0"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 14,
@@ -2386,7 +2386,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 10,
         "x": 11,
         "y": 141
       },
@@ -2418,7 +2418,7 @@
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
-          "legendFormat": "IP: {{ip}} MAC: {{link_layer_address}}",
+          "legendFormat": "IP: {{ip}}        MAC:{{link_layer_address}}",
           "range": true,
           "refId": "A",
           "useBackend": false
@@ -2589,12 +2589,12 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Juniper-gNMI",
   "uid": "9d990666-2396-4a65-b4ba-b8a20e7c6aef",
-  "version": 97
+  "version": 102
 }
