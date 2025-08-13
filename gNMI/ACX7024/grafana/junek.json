@@ -22,7 +22,7 @@
   "links": [],
   "panels": [
     {
-      "collapsed": true,
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -30,293 +30,292 @@
         "y": 0
       },
       "id": 23,
-      "panels": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "fetlgfpqby800c"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "fieldMinMax": false,
-              "mappings": [
-                {
-                  "options": {
-                    "0": {
-                      "color": "semi-dark-red",
-                      "index": 0,
-                      "text": "DOWN"
-                    },
-                    "1": {
-                      "color": "light-red",
-                      "index": 1,
-                      "text": "INIT"
-                    },
-                    "2": {
-                      "color": "super-light-red",
-                      "index": 2,
-                      "text": "2WAY"
-                    },
-                    "3": {
-                      "color": "light-orange",
-                      "index": 3,
-                      "text": "EXSTART"
-                    },
-                    "4": {
-                      "color": "super-light-yellow",
-                      "index": 4,
-                      "text": "EXCHANGE"
-                    },
-                    "5": {
-                      "color": "super-light-green",
-                      "index": 5,
-                      "text": "LOADING"
-                    },
-                    "6": {
-                      "color": "semi-dark-green",
-                      "index": 6,
-                      "text": "FULL"
-                    }
-                  },
-                  "type": "value"
-                },
-                {
-                  "options": {
-                    "match": "null",
-                    "result": {
-                      "color": "transparent",
-                      "index": 7,
-                      "text": "DOWN"
-                    }
-                  },
-                  "type": "special"
-                }
-              ],
-              "noValue": "DOWN",
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 10
-          },
-          "id": 22,
-          "options": {
-            "colorMode": "background_solid",
-            "graphMode": "none",
-            "justifyMode": "center",
-            "orientation": "auto",
-            "percentChangeColorMode": "standard",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showPercentChange": false,
-            "text": {
-              "titleSize": 20
-            },
-            "textMode": "value_and_name",
-            "wideLayout": false
-          },
-          "pluginVersion": "12.0.2",
-          "targets": [
-            {
-              "editorMode": "code",
-              "exemplar": false,
-              "expr": "OSPF_Neighbors_state_adjacency_state",
-              "format": "time_series",
-              "instant": false,
-              "legendFormat": "{{router_id}} via {{id}}",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "title": "OSPF NEIGHBOUR STATE",
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "fetlgfpqby800c"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "custom": {
-                "align": "center",
-                "cellOptions": {
-                  "applyToRow": false,
-                  "mode": "gradient",
-                  "type": "color-background",
-                  "wrapText": true
-                },
-                "filterable": true,
-                "inspect": false
-              },
-              "mappings": [
-                {
-                  "options": {
-                    "match": "null",
-                    "result": {
-                      "color": "transparent",
-                      "index": 0,
-                      "text": "DOWN"
-                    }
-                  },
-                  "type": "special"
-                },
-                {
-                  "options": {
-                    "match": "empty",
-                    "result": {
-                      "color": "transparent",
-                      "index": 1,
-                      "text": "DOWN"
-                    }
-                  },
-                  "type": "special"
-                }
-              ],
-              "noValue": "DOWN",
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 10
-          },
-          "id": 24,
-          "options": {
-            "cellHeight": "sm",
-            "footer": {
-              "countRows": false,
-              "enablePagination": false,
-              "fields": "",
-              "reducer": [
-                "sum"
-              ],
-              "show": false
-            },
-            "frameIndex": 0,
-            "showHeader": true,
-            "sortBy": [
-              {
-                "desc": true,
-                "displayName": "designated_router"
-              }
-            ]
-          },
-          "pluginVersion": "12.0.2",
-          "targets": [
-            {
-              "editorMode": "code",
-              "expr": "max_over_time(OSPF_Neighbors_state_adjacency_state[1m])\r\n",
-              "legendFormat": "__auto",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "title": "NEIGHOUR INFO",
-          "transformations": [
-            {
-              "id": "labelsToFields",
-              "options": {
-                "keepLabels": [
-                  "backup_designated_router",
-                  "designated_router",
-                  "id",
-                  "router_id"
-                ],
-                "mode": "columns"
-              }
-            },
-            {
-              "id": "groupBy",
-              "options": {
-                "fields": {
-                  "OSPF_Neighbors_state_adjacency_state": {
-                    "aggregations": [
-                      "lastNotNull"
-                    ],
-                    "operation": "aggregate"
-                  },
-                  "Time": {
-                    "aggregations": []
-                  },
-                  "backup_designated_router": {
-                    "aggregations": [
-                      "lastNotNull"
-                    ],
-                    "operation": "aggregate"
-                  },
-                  "designated_router": {
-                    "aggregations": [
-                      "lastNotNull"
-                    ],
-                    "operation": "aggregate"
-                  },
-                  "id": {
-                    "aggregations": [
-                      "lastNotNull"
-                    ],
-                    "operation": "aggregate"
-                  },
-                  "router_id": {
-                    "aggregations": [],
-                    "operation": "groupby"
-                  }
-                }
-              }
-            },
-            {
-              "id": "renameByRegex",
-              "options": {
-                "regex": "^(.*)\\s+\\(lastNotNull\\)$",
-                "renamePattern": "$1"
-              }
-            }
-          ],
-          "type": "table"
-        }
-      ],
+      "panels": [],
       "title": "OSPF",
       "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "fetlgfpqby800c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "semi-dark-red",
+                  "index": 0,
+                  "text": "DOWN"
+                },
+                "1": {
+                  "color": "light-red",
+                  "index": 1,
+                  "text": "INIT"
+                },
+                "2": {
+                  "color": "super-light-red",
+                  "index": 2,
+                  "text": "2WAY"
+                },
+                "3": {
+                  "color": "light-orange",
+                  "index": 3,
+                  "text": "EXSTART"
+                },
+                "4": {
+                  "color": "super-light-yellow",
+                  "index": 4,
+                  "text": "EXCHANGE"
+                },
+                "5": {
+                  "color": "super-light-green",
+                  "index": 5,
+                  "text": "LOADING"
+                },
+                "6": {
+                  "color": "semi-dark-green",
+                  "index": 6,
+                  "text": "FULL"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "color": "transparent",
+                  "index": 7,
+                  "text": "DOWN"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "noValue": "DOWN",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "id": 22,
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {
+          "titleSize": 20
+        },
+        "textMode": "value_and_name",
+        "wideLayout": false
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "OSPF_Neighbors_state_adjacency_state",
+          "format": "time_series",
+          "instant": false,
+          "legendFormat": "{{router_id}} via {{id}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "OSPF NEIGHBOUR STATE",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "fetlgfpqby800c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "applyToRow": false,
+              "mode": "gradient",
+              "type": "color-background",
+              "wrapText": true
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "color": "transparent",
+                  "index": 0,
+                  "text": "DOWN"
+                }
+              },
+              "type": "special"
+            },
+            {
+              "options": {
+                "match": "empty",
+                "result": {
+                  "color": "transparent",
+                  "index": 1,
+                  "text": "DOWN"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "noValue": "DOWN",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 24,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 0,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "designated_router"
+          }
+        ]
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "max_over_time(OSPF_Neighbors_state_adjacency_state[1m])\r\n",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "NEIGHOUR INFO",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {
+            "keepLabels": [
+              "backup_designated_router",
+              "designated_router",
+              "id",
+              "router_id"
+            ],
+            "mode": "columns"
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "OSPF_Neighbors_state_adjacency_state": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Time": {
+                "aggregations": []
+              },
+              "backup_designated_router": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "designated_router": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "id": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "router_id": {
+                "aggregations": [],
+                "operation": "groupby"
+              }
+            }
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "^(.*)\\s+\\(lastNotNull\\)$",
+            "renamePattern": "$1"
+          }
+        }
+      ],
+      "type": "table"
     },
     {
       "collapsed": false,
@@ -324,7 +323,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 1
+        "y": 9
       },
       "id": 18,
       "panels": [],
@@ -332,19 +331,123 @@
       "type": "row"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "fetlgfpqby800c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "transparent",
+                  "index": 0,
+                  "text": "DOWN"
+                },
+                "1": {
+                  "color": "semi-dark-orange",
+                  "index": 1,
+                  "text": "IDLE"
+                },
+                "2": {
+                  "color": "semi-dark-yellow",
+                  "index": 2,
+                  "text": "ACTIVE"
+                },
+                "3": {
+                  "color": "light-blue",
+                  "index": 3,
+                  "text": "CONNECT"
+                },
+                "4": {
+                  "color": "semi-dark-green",
+                  "index": 4,
+                  "text": "ESTABLISHED"
+                },
+                "5": {
+                  "color": "light-purple",
+                  "index": 5,
+                  "text": "OPENCONFIRM"
+                },
+                "6": {
+                  "color": "dark-purple",
+                  "index": 6,
+                  "text": "OPENSENT"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": []
+          }
+        ]
+      },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 2
+        "y": 10
       },
-      "id": 17,
-      "libraryPanel": {
-        "name": "BGP STATUS SESSION",
-        "uid": "besvux5e95p8gb"
+      "id": 38,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "title": "BGP STATUS SESSION",
-      "type": "library-panel-ref"
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "BGP_SESSION_STATE_session_state",
+          "legendFormat": "{{neighbor_address}} peer as",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "BGP STATE",
+      "type": "stat"
     },
     {
       "datasource": {
@@ -388,7 +491,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 2
+        "y": 10
       },
       "id": 19,
       "options": {
@@ -476,7 +579,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 10
+        "y": 18
       },
       "id": 20,
       "options": {
@@ -498,7 +601,9 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "BGP_STATE_last_established * 1000",
+          "expr": "BGP_STATE_last_established- 7200000",
+          "format": "time_series",
+          "interval": "",
           "legendFormat": "{{neighbor_address}}",
           "range": true,
           "refId": "A"
@@ -508,12 +613,75 @@
       "type": "stat"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "fetlgfpqby800c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 18
+      },
+      "id": 39,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "BGP_STATE_peer_as",
+          "legendFormat": "{{neighbor_address}} peer as",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "BGP peer as",
+      "type": "stat"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 18
+        "y": 26
       },
       "id": 14,
       "panels": [],
@@ -612,7 +780,7 @@
         "h": 13,
         "w": 24,
         "x": 0,
-        "y": 19
+        "y": 27
       },
       "id": 13,
       "options": {
@@ -742,7 +910,7 @@
         "h": 14,
         "w": 24,
         "x": 0,
-        "y": 32
+        "y": 40
       },
       "id": 21,
       "options": {
@@ -840,7 +1008,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 46
+        "y": 54
       },
       "id": 36,
       "options": {
@@ -880,7 +1048,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 58
+        "y": 66
       },
       "id": 2,
       "panels": [],
@@ -951,7 +1119,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 59
+        "y": 67
       },
       "id": 3,
       "options": {
@@ -1044,13 +1212,38 @@
           },
           "unit": "bps"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "et-0/0/2"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 59
+        "y": 67
       },
       "id": 1,
       "options": {
@@ -1147,7 +1340,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 67
+        "y": 75
       },
       "id": 15,
       "options": {
@@ -1183,7 +1376,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 75
+        "y": 83
       },
       "id": 6,
       "panels": [],
@@ -1251,7 +1444,7 @@
         "h": 16,
         "w": 8,
         "x": 0,
-        "y": 76
+        "y": 84
       },
       "id": 25,
       "options": {
@@ -1394,13 +1587,38 @@
           },
           "unit": "watt"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "PSM0"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
         "w": 16,
         "x": 8,
-        "y": 76
+        "y": 84
       },
       "id": 12,
       "options": {
@@ -1492,7 +1710,7 @@
         "h": 8,
         "w": 16,
         "x": 8,
-        "y": 84
+        "y": 92
       },
       "id": 11,
       "options": {
@@ -1582,16 +1800,21 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 17,
+        "h": 14,
+        "w": 24,
         "x": 0,
-        "y": 92
+        "y": 100
       },
-      "id": 4,
+      "id": 37,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "lastNotNull",
+            "min",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -1605,13 +1828,13 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "avg(TEMP_instant) by (source)\r\n",
+          "expr": "COMPONENT_STATE_instant{\r\n  name=~\"CHASSIS0:RE0:(CPU_TEMPERATURE|RE_TEMPERATURE|INLET_TEMPERATURE|OUTLET_TEMPERATURE|FPC_TEMPERATURE)\"\r\n}\r\n",
           "legendFormat": "{{name}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "AVG temp for chassis and fpc",
+      "title": "MAIN COMP TEMP",
       "type": "timeseries"
     },
     {
@@ -1620,7 +1843,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 100
+        "y": 114
       },
       "id": 10,
       "panels": [],
@@ -1685,13 +1908,38 @@
           },
           "unit": "Bps"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "et-0/0/3 queue 0"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 14,
         "w": 11,
         "x": 0,
-        "y": 101
+        "y": 115
       },
       "id": 27,
       "options": {
@@ -1711,8 +1959,8 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum by (interface_id, queue) (rate(QUEUE_STATE_queue_state_transmit_octets))*8",
-          "legendFormat": "__auto",
+          "expr": "sum by (interface_id, queue) (rate(QUEUE_STATE_transmit_octets))*8",
+          "legendFormat": "{{interface_id}} queue {{queue}}",
           "range": true,
           "refId": "A"
         }
@@ -1777,46 +2025,13 @@
             ]
           }
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "{interface_id=\"et-0/0/1\", queue=\"2\"}",
-                  "{interface_id=\"et-0/0/1\", queue=\"1\"}",
-                  "{interface_id=\"et-0/0/0\", queue=\"0\"}",
-                  "{interface_id=\"et-0/0/2\", queue=\"0\"}",
-                  "{interface_id=\"et-0/0/3\", queue=\"3\"}",
-                  "{interface_id=\"et-0/0/2\", queue=\"3\"}",
-                  "{interface_id=\"et-0/0/0\", queue=\"3\"}",
-                  "{interface_id=\"et-0/0/1\", queue=\"0\"}",
-                  "{interface_id=\"et-0/0/3\", queue=\"0\"}"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 14,
         "w": 13,
         "x": 11,
-        "y": 101
+        "y": 115
       },
       "id": 28,
       "options": {
@@ -1836,8 +2051,8 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum by (interface_id, queue) (rate(QUEUE_STATE_queue_state_transmit_pkts))",
-          "legendFormat": "__auto",
+          "expr": "sum by (interface_id, queue) (rate(QUEUE_STATE_transmit_pkts))",
+          "legendFormat": "{{interface_id}} queue {{queue}}",
           "range": true,
           "refId": "A"
         }
@@ -1903,39 +2118,13 @@
           },
           "unit": "Bps"
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "{interface_id=\"et-0/0/1\", name=\"0\"}",
-                  "{interface_id=\"et-0/0/1\", name=\"3\"}"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 11,
         "w": 11,
         "x": 0,
-        "y": 115
+        "y": 129
       },
       "id": 30,
       "options": {
@@ -1955,8 +2144,8 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum by (interface_id, queue) (rate(QUEUE_STATE_queue_state_dropped_octets))*8",
-          "legendFormat": "__auto",
+          "expr": "sum by (interface_id, queue) (rate(QUEUE_STATE_dropped_octets))*8",
+          "legendFormat": "{{interface_id}} queue {{queue}}",
           "range": true,
           "refId": "A"
         }
@@ -2021,39 +2210,13 @@
             ]
           }
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "{interface_id=\"et-0/0/1\", name=\"3\"}",
-                  "{interface_id=\"et-0/0/1\", name=\"0\"}"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 11,
         "w": 13,
         "x": 11,
-        "y": 115
+        "y": 129
       },
       "id": 31,
       "options": {
@@ -2073,8 +2236,8 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum by (interface_id, queue) (rate(QUEUE_STATE_queue_state_dropped_pkts))",
-          "legendFormat": "__auto",
+          "expr": "sum by (interface_id, queue) (rate(QUEUE_STATE_dropped_pkts))",
+          "legendFormat": "{{interface_id}} queue {{queue}}",
           "range": true,
           "refId": "A"
         }
@@ -2088,7 +2251,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 126
+        "y": 140
       },
       "id": 33,
       "panels": [],
@@ -2141,9 +2304,9 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 11,
         "x": 0,
-        "y": 127
+        "y": 141
       },
       "id": 32,
       "options": {
@@ -2169,11 +2332,11 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "max by(ip, link_layer_address) (ARP_Neighbors_neighbor_state)",
+          "expr": "ARP_Neighbors_neighbor_state",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
-          "legendFormat": "{{ip}} {{link_layer_address}}",
+          "legendFormat": "IP: {{ip}} MAC:{{link_layer_address}}",
           "range": true,
           "refId": "A",
           "useBackend": false
@@ -2224,8 +2387,8 @@
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 12,
-        "y": 127
+        "x": 11,
+        "y": 141
       },
       "id": 34,
       "options": {
@@ -2255,7 +2418,7 @@
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
-          "legendFormat": "{{ip}} {{link_layer_address}}",
+          "legendFormat": "IP: {{ip}} MAC: {{link_layer_address}}",
           "range": true,
           "refId": "A",
           "useBackend": false
@@ -2308,15 +2471,15 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 4,
+        "w": 10,
         "x": 0,
-        "y": 135
+        "y": 149
       },
       "id": 35,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
-        "justifyMode": "auto",
+        "justifyMode": "center",
         "orientation": "auto",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
@@ -2335,7 +2498,7 @@
         {
           "editorMode": "code",
           "expr": "sum by (interface_name) (\r\n  ARP_Neighbors_neighbor_state == 1\r\n)\r\n",
-          "legendFormat": "{{ip}} |{{ link_layer_address }} |{{ interface_name}}",
+          "legendFormat": "{{ interface_name}}",
           "range": true,
           "refId": "A"
         }
@@ -2426,12 +2589,12 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Juniper-gNMI",
   "uid": "9d990666-2396-4a65-b4ba-b8a20e7c6aef",
-  "version": 61
+  "version": 97
 }
