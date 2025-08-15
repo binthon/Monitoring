@@ -112,19 +112,35 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "OSPF_Neighbors_adjacency_state {__name__=\"OSPF_Neighbors_adjacency_state\", area_id=\"0.0.0.0\", backup_designated_router=\"10.1.0.105\", designated_router=\"10.1.0.105\", interface=\"irb.100\", name=\"DEFAULT\", neighbor_id=\"1.0.0.13\", source=\"10.250.249.165\"}"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": []
+          }
+        ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
         "x": 0,
         "y": 1
       },
       "id": 22,
       "options": {
-        "colorMode": "background_solid",
+        "colorMode": "value",
         "graphMode": "none",
-        "justifyMode": "center",
+        "justifyMode": "auto",
         "orientation": "auto",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
@@ -135,21 +151,18 @@
           "values": false
         },
         "showPercentChange": false,
-        "text": {
-          "titleSize": 20
-        },
-        "textMode": "value_and_name",
-        "wideLayout": false
+        "textMode": "auto",
+        "wideLayout": true
       },
       "pluginVersion": "12.0.2",
       "targets": [
         {
           "editorMode": "code",
           "exemplar": false,
-          "expr": "OSPF_Neighbors_state_adjacency_state",
+          "expr": "max by (neighbor_id, interface) (\r\n  last_over_time(\r\n    OSPF_Neighbors_adjacency_state[$__rate_interval]\r\n  )\r\n)\r\n",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "{{router_id}} via {{id}}",
+          "legendFormat": "{{neighbor_id}} via {{interface}}",
           "range": true,
           "refId": "A"
         }
@@ -165,44 +178,169 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "palette-classic"
           },
           "custom": {
-            "align": "center",
-            "cellOptions": {
-              "applyToRow": false,
-              "mode": "gradient",
-              "type": "color-background",
-              "wrapText": true
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
             },
-            "filterable": true,
-            "inspect": false
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
+          "decimals": 0,
           "mappings": [
             {
               "options": {
-                "match": "null",
-                "result": {
-                  "color": "transparent",
+                "0": {
                   "index": 0,
                   "text": "DOWN"
-                }
-              },
-              "type": "special"
-            },
-            {
-              "options": {
-                "match": "empty",
-                "result": {
-                  "color": "transparent",
+                },
+                "1": {
                   "index": 1,
-                  "text": "DOWN"
+                  "text": "INIT"
+                },
+                "2": {
+                  "index": 2,
+                  "text": "TWO_WAY"
+                },
+                "3": {
+                  "index": 3,
+                  "text": "EXSTART"
+                },
+                "4": {
+                  "index": 4,
+                  "text": "EXCHANGE"
+                },
+                "5": {
+                  "index": 5,
+                  "text": "LOADING"
+                },
+                "6": {
+                  "index": 6,
+                  "text": "FULL"
                 }
               },
-              "type": "special"
+              "type": "value"
             }
           ],
-          "noValue": "DOWN",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 24,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "max by (neighbor_id, interface) (\r\n  last_over_time(\r\n    OSPF_Neighbors_adjacency_state[$__rate_interval]\r\n  )\r\n)\r\n",
+          "legendFormat": "{{neighbor_id}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "NEIGHBOR STATE IN TIME",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "fetlgfpqby800c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -220,11 +358,95 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 1
+        "w": 9,
+        "x": 0,
+        "y": 10
       },
-      "id": 24,
+      "id": 40,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "max by (neighbor_id, interface) (\r\n  last_over_time(\r\n     OSPF_Neighbors_priority[$__rate_interval]\r\n  )\r\n)\r\n",
+          "legendFormat": "priority for {{neighbor_id}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "NEIGHBOR PRIORITY ",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "fetlgfpqby800c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "semi-dark-yellow",
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto",
+              "wrapText": false
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "neighbor_id"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 15,
+        "x": 9,
+        "y": 10
+      },
+      "id": 41,
       "options": {
         "cellHeight": "sm",
         "footer": {
@@ -238,80 +460,63 @@
         },
         "frameIndex": 0,
         "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "designated_router"
-          }
-        ]
+        "sortBy": []
       },
       "pluginVersion": "12.0.2",
       "targets": [
         {
           "editorMode": "code",
-          "expr": "max_over_time(OSPF_Neighbors_state_adjacency_state[1m])\r\n",
+          "exemplar": false,
+          "expr": "max by (neighbor_id, area_id, designated_router, backup_designated_router, interface) (\r\n  OSPF_Neighbors_adjacency_state{neighbor_id=~\"$neighbor\"}\r\n)\r\n",
+          "format": "table",
+          "instant": true,
           "legendFormat": "__auto",
-          "range": true,
+          "range": false,
           "refId": "A"
         }
       ],
-      "title": "NEIGHOUR INFO",
+      "title": "NEIGHBOR INFO",
       "transformations": [
         {
           "id": "labelsToFields",
           "options": {
-            "keepLabels": [
-              "backup_designated_router",
-              "designated_router",
-              "id",
-              "router_id"
-            ],
             "mode": "columns"
           }
         },
         {
-          "id": "groupBy",
+          "id": "filterFieldsByName",
           "options": {
-            "fields": {
-              "OSPF_Neighbors_state_adjacency_state": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "Time": {
-                "aggregations": []
-              },
-              "backup_designated_router": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "designated_router": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "id": {
-                "aggregations": [
-                  "lastNotNull"
-                ],
-                "operation": "aggregate"
-              },
-              "router_id": {
-                "aggregations": [],
-                "operation": "groupby"
-              }
+            "byVariable": false,
+            "include": {
+              "names": [
+                "area_id",
+                "backup_designated_router",
+                "designated_router",
+                "interface",
+                "neighbor_id"
+              ]
             }
           }
         },
         {
-          "id": "renameByRegex",
+          "id": "organize",
           "options": {
-            "regex": "^(.*)\\s+\\(lastNotNull\\)$",
-            "renamePattern": "$1"
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "area_id": 1,
+              "backup_designated_router": 2,
+              "designated_router": 3,
+              "interface": 4,
+              "neighbor_id": 0
+            },
+            "renameByName": {
+              "area_id": "AREA",
+              "backup_designated_router": "BACKUP DESIGNATED ROUTER",
+              "designated_router": "DESIGNATED ROUTER",
+              "interface": "INTERFACE",
+              "neighbor_id": "NEIGHBOR"
+            }
           }
         }
       ],
@@ -323,7 +528,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 18
       },
       "id": 18,
       "panels": [],
@@ -415,7 +620,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 10
+        "y": 19
       },
       "id": 38,
       "options": {
@@ -491,7 +696,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 10
+        "y": 19
       },
       "id": 19,
       "options": {
@@ -579,7 +784,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 18
+        "y": 27
       },
       "id": 20,
       "options": {
@@ -642,7 +847,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 18
+        "y": 27
       },
       "id": 39,
       "options": {
@@ -681,7 +886,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 35
       },
       "id": 14,
       "panels": [],
@@ -778,7 +983,7 @@
         "h": 13,
         "w": 24,
         "x": 0,
-        "y": 27
+        "y": 36
       },
       "id": 13,
       "options": {
@@ -908,7 +1113,7 @@
         "h": 14,
         "w": 24,
         "x": 0,
-        "y": 40
+        "y": 49
       },
       "id": 21,
       "options": {
@@ -1006,7 +1211,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 54
+        "y": 63
       },
       "id": 36,
       "options": {
@@ -1048,7 +1253,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 66
+        "y": 75
       },
       "id": 2,
       "panels": [],
@@ -1121,7 +1326,7 @@
               "options": {
                 "mode": "exclude",
                 "names": [
-                  "et-0/0/0"
+                  "et-0/0/1"
                 ],
                 "prefix": "All except:",
                 "readOnly": true
@@ -1144,7 +1349,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 67
+        "y": 76
       },
       "id": 3,
       "options": {
@@ -1245,7 +1450,7 @@
               "options": {
                 "mode": "exclude",
                 "names": [
-                  "et-0/0/0"
+                  "et-0/0/2"
                 ],
                 "prefix": "All except:",
                 "readOnly": true
@@ -1268,7 +1473,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 67
+        "y": 76
       },
       "id": 1,
       "options": {
@@ -1365,7 +1570,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 75
+        "y": 84
       },
       "id": 15,
       "options": {
@@ -1401,7 +1606,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 83
+        "y": 92
       },
       "id": 6,
       "panels": [],
@@ -1469,7 +1674,7 @@
         "h": 16,
         "w": 8,
         "x": 0,
-        "y": 84
+        "y": 93
       },
       "id": 25,
       "options": {
@@ -1643,7 +1848,7 @@
         "h": 8,
         "w": 16,
         "x": 8,
-        "y": 84
+        "y": 93
       },
       "id": 12,
       "options": {
@@ -1735,7 +1940,7 @@
         "h": 8,
         "w": 16,
         "x": 8,
-        "y": 92
+        "y": 101
       },
       "id": 11,
       "options": {
@@ -1828,7 +2033,7 @@
         "h": 14,
         "w": 24,
         "x": 0,
-        "y": 100
+        "y": 109
       },
       "id": 37,
       "options": {
@@ -1868,7 +2073,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 114
+        "y": 123
       },
       "id": 10,
       "panels": [],
@@ -1939,7 +2144,7 @@
         "h": 14,
         "w": 11,
         "x": 0,
-        "y": 115
+        "y": 124
       },
       "id": 27,
       "options": {
@@ -2031,7 +2236,7 @@
         "h": 14,
         "w": 13,
         "x": 11,
-        "y": 115
+        "y": 124
       },
       "id": 28,
       "options": {
@@ -2124,7 +2329,7 @@
         "h": 11,
         "w": 11,
         "x": 0,
-        "y": 129
+        "y": 138
       },
       "id": 30,
       "options": {
@@ -2216,7 +2421,7 @@
         "h": 11,
         "w": 13,
         "x": 11,
-        "y": 129
+        "y": 138
       },
       "id": 31,
       "options": {
@@ -2251,7 +2456,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 140
+        "y": 149
       },
       "id": 33,
       "panels": [],
@@ -2306,7 +2511,7 @@
         "h": 8,
         "w": 11,
         "x": 0,
-        "y": 141
+        "y": 150
       },
       "id": 32,
       "options": {
@@ -2388,7 +2593,7 @@
         "h": 8,
         "w": 10,
         "x": 11,
-        "y": 141
+        "y": 150
       },
       "id": 34,
       "options": {
@@ -2473,7 +2678,7 @@
         "h": 5,
         "w": 10,
         "x": 0,
-        "y": 149
+        "y": 158
       },
       "id": 35,
       "options": {
@@ -2585,16 +2790,48 @@
         "refresh": 1,
         "regex": "^et-.*$",
         "type": "query"
+      },
+      {
+        "allValue": "ALL",
+        "current": {
+          "text": [
+            "1.0.0.12",
+            "1.0.0.13",
+            "1.0.0.14",
+            "1.0.0.15",
+            "1.0.0.2"
+          ],
+          "value": [
+            "1.0.0.12",
+            "1.0.0.13",
+            "1.0.0.14",
+            "1.0.0.15",
+            "1.0.0.2"
+          ]
+        },
+        "definition": "label_values(OSPF_Neighbors_adjacency_state,neighbor_id)",
+        "includeAll": true,
+        "multi": true,
+        "name": "neighbor",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(OSPF_Neighbors_adjacency_state,neighbor_id)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Juniper-gNMI",
   "uid": "9d990666-2396-4a65-b4ba-b8a20e7c6aef",
-  "version": 102
+  "version": 137
 }
