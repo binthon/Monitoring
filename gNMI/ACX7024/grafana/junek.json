@@ -1450,7 +1450,10 @@
               "options": {
                 "mode": "exclude",
                 "names": [
-                  "et-0/0/2"
+                  "et-0/0/0",
+                  "et-0/0/1",
+                  "et-0/0/2",
+                  "et-0/0/3"
                 ],
                 "prefix": "All except:",
                 "readOnly": true
@@ -2675,7 +2678,7 @@
         ]
       },
       "gridPos": {
-        "h": 5,
+        "h": 6,
         "w": 10,
         "x": 0,
         "y": 158
@@ -2750,6 +2753,412 @@
         }
       ],
       "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 164
+      },
+      "id": 46,
+      "panels": [],
+      "title": "RSTP",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "fetlgfpqby800c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "transparent",
+                  "index": 0,
+                  "text": "DOWN"
+                },
+                "1": {
+                  "color": "semi-dark-purple",
+                  "index": 1,
+                  "text": "BLOCKING"
+                },
+                "2": {
+                  "color": "semi-dark-blue",
+                  "index": 2,
+                  "text": "LISTENING"
+                },
+                "3": {
+                  "color": "semi-dark-yellow",
+                  "index": 3,
+                  "text": "LEARNING"
+                },
+                "4": {
+                  "color": "semi-dark-orange",
+                  "index": 4,
+                  "text": "FORWARDING"
+                },
+                "5": {
+                  "color": "light-green",
+                  "index": 5,
+                  "text": "BACKUP"
+                },
+                "6": {
+                  "color": "#7f5d5d",
+                  "index": 6,
+                  "text": "ALTERNATE"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 165
+      },
+      "id": 42,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value_and_name",
+        "wideLayout": false
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "RSTP_INTERFACES_port_state\r\n",
+          "format": "time_series",
+          "instant": true,
+          "legendFormat": "{{name}}",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "RSTP STATE",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "fetlgfpqby800c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 19,
+        "x": 5,
+        "y": 165
+      },
+      "id": 44,
+      "options": {
+        "cellHeight": "md",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 1,
+        "showHeader": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "fetlgfpqby800c"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by (source,designated_root_address,bridge_address) (RSTP_STATE_bridge_priority)\r\n",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "{{bridge_priority}}",
+          "range": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "fetlgfpqby800c"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by (source,designated_root_address,bridge_address) (RSTP_STATE_root_cost)",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "{{root_cost}}",
+          "range": false,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "fetlgfpqby800c"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by (source,designated_root_address,bridge_address) (RSTP_STATE_designated_root_priority)",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "{{root_priority}}",
+          "range": false,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "fetlgfpqby800c"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by (source,designated_root_address,bridge_address) (RSTP_STATE_designated_root_priority)",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "{{designated_root_priority}}",
+          "range": false,
+          "refId": "D"
+        }
+      ],
+      "title": "RSTP INFO",
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "Time",
+            "mode": "inner"
+          }
+        },
+        {
+          "id": "labelsToFields",
+          "options": {
+            "mode": "columns"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "source": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time": 4,
+              "Value 1": 1,
+              "Value 2": 5,
+              "Value 3": 6,
+              "Value 4": 3,
+              "bridge_address": 0,
+              "designated_root_address": 2,
+              "source": 7
+            },
+            "renameByName": {
+              "Value 1": "BRIDGE PRIORITY",
+              "Value 2": "ROOT_COST",
+              "Value 3": "ROOT_PRIORITY",
+              "Value 4": "DESIGNATED ROOT PRIORITY",
+              "Value 5": "PORT PRIORITY",
+              "bridge_address": "BRDIGE ADDRESS",
+              "designated_bridge_address": "BRIDGE ADDRESS",
+              "designated_root_address": "DESIGNATED ROOT ADDRESS"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "fetlgfpqby800c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 11,
+        "x": 0,
+        "y": 169
+      },
+      "id": 45,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by (source,designated_bridge_address,name) (RSTP_INTERFACES_port_priority)",
+          "instant": true,
+          "legendFormat": "{{port_priority}}",
+          "range": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "fetlgfpqby800c"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by (source,designated_bridge_address,name) (RSTP_INTERFACES_cost)",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "{{cost}}",
+          "range": false,
+          "refId": "C"
+        }
+      ],
+      "title": "RSTP PEER CONNECTION INTERFACES",
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "Time",
+            "mode": "inner"
+          }
+        },
+        {
+          "id": "labelsToFields",
+          "options": {
+            "mode": "columns"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "source": false
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time": 3,
+              "Value 1": 4,
+              "Value 2": 5,
+              "designated_bridge_address": 0,
+              "name": 2,
+              "source": 1
+            },
+            "renameByName": {
+              "Value 1": "PORT PRIORITY",
+              "Value 2": "DESIGNATED COST",
+              "Value 3": "designated_bridge_priority",
+              "designated_bridge_address": "BRIDGE ADDRESS",
+              "name": "INTERFACE",
+              "source": "ROUTER IP"
+            }
+          }
+        }
+      ],
+      "type": "table"
     }
   ],
   "preload": false,
@@ -2833,5 +3242,5 @@
   "timezone": "browser",
   "title": "Juniper-gNMI",
   "uid": "9d990666-2396-4a65-b4ba-b8a20e7c6aef",
-  "version": 137
+  "version": 157
 }
