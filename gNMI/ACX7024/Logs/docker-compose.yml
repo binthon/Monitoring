@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  loki:
+    image: grafana/loki:2.9.0
+    container_name: loki_acx7024
+    command: ["-config.file=/etc/loki/loki.yaml"]
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki/loki.yaml:/etc/loki/loki.yaml:ro
+      - loki-data:/loki
+    restart: unless-stopped
+    networks: [acx7024_default]
+
+  rsyslog:
+    image: rsyslog/rsyslog:2025-04 
+    container_name: rsyslog_acx7024
+    ports:
+      - "514:514/udp"         
+      - "514:514/tcp"         
+    volumes:
+      - ./rsyslog/rsyslog.conf:/etc/rsyslog.conf:ro
+    restart: unless-stopped
+    networks: [acx7024_default]
+
+  promtail:
+    image: grafana/promtail:2.9.0
+    container_name: promtail_acx7024
+    command: ["-config.file=/etc/promtail/promtail.yaml", "-log.level=debug"]
+    ports:
+      - "9080:9080"      
+      - "1514:1514/tcp"      
+    volumes:
+      - ./promtail/promtail.yaml:/etc/promtail/promtail.yaml:ro
+      - ./promtail/positions.yaml:/etc/promtail/positions.yaml
+    restart: unless-stopped
+    networks: [acx7024_default]
+
+volumes:
+  loki-data:
+
+networks:
+  acx7024_default:
+    external: true
