@@ -7,9 +7,12 @@ services:
     command: ["-config.file=/etc/loki/loki.yaml"]
     ports:
       - "3100:3100"
+    environment:
+      - TZ=Europe/Warsaw
     volumes:
       - ./loki/loki.yaml:/etc/loki/loki.yaml:ro
       - loki-data:/loki
+      - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     networks: [acx7024_default]
 
@@ -18,9 +21,12 @@ services:
     container_name: rsyslog_acx7024
     ports:
       - "514:514/udp"         
-      - "514:514/tcp"         
+      - "514:514/tcp"    
+    environment:
+      - TZ=Europe/Warsaw     
     volumes:
       - ./rsyslog/rsyslog.conf:/etc/rsyslog.conf:ro
+      - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     networks: [acx7024_default]
 
@@ -30,10 +36,12 @@ services:
     command: ["-config.file=/etc/promtail/promtail.yaml", "-log.level=debug"]
     ports:
       - "9080:9080"      
-      - "1514:1514/tcp"      
+      - "1514:1514/tcp"    
+    environment:
+      - TZ=Europe/Warsaw  
     volumes:
       - ./promtail/promtail.yaml:/etc/promtail/promtail.yaml:ro
-      - ./promtail/positions.yaml:/etc/promtail/positions.yaml
+      - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     networks: [acx7024_default]
 

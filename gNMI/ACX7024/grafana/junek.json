@@ -29,6 +29,147 @@
         "x": 0,
         "y": 0
       },
+      "id": 48,
+      "panels": [],
+      "title": "LOGS",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "bex23bqh25blsd"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "labels"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 94
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Line"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 949
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 543
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 47,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "bex23bqh25blsd"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "{source=\"juniper\", app=~\"$app\", host=~\"$host\", command=~\"$command\"}\r\n",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "LOGS",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "id": true,
+              "labels": true,
+              "tsNs": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Line": 1,
+              "Time": 2,
+              "id": 4,
+              "labels": 0,
+              "tsNs": 3
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
       "id": 23,
       "panels": [],
       "title": "OSPF",
@@ -134,7 +275,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 1
+        "y": 15
       },
       "id": 22,
       "options": {
@@ -268,7 +409,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 1
+        "y": 15
       },
       "id": 24,
       "options": {
@@ -360,7 +501,7 @@
         "h": 8,
         "w": 9,
         "x": 0,
-        "y": 10
+        "y": 24
       },
       "id": 40,
       "options": {
@@ -444,7 +585,7 @@
         "h": 8,
         "w": 15,
         "x": 9,
-        "y": 10
+        "y": 24
       },
       "id": 41,
       "options": {
@@ -528,7 +669,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 18
+        "y": 32
       },
       "id": 18,
       "panels": [],
@@ -620,7 +761,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 19
+        "y": 33
       },
       "id": 38,
       "options": {
@@ -696,7 +837,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 19
+        "y": 33
       },
       "id": 19,
       "options": {
@@ -784,7 +925,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 27
+        "y": 41
       },
       "id": 20,
       "options": {
@@ -847,7 +988,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 27
+        "y": 41
       },
       "id": 39,
       "options": {
@@ -886,7 +1027,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 35
+        "y": 49
       },
       "id": 14,
       "panels": [],
@@ -983,7 +1124,7 @@
         "h": 13,
         "w": 24,
         "x": 0,
-        "y": 36
+        "y": 50
       },
       "id": 13,
       "options": {
@@ -1113,7 +1254,7 @@
         "h": 14,
         "w": 24,
         "x": 0,
-        "y": 49
+        "y": 63
       },
       "id": 21,
       "options": {
@@ -1211,7 +1352,7 @@
         "h": 12,
         "w": 24,
         "x": 0,
-        "y": 63
+        "y": 77
       },
       "id": 36,
       "options": {
@@ -1253,7 +1394,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 75
+        "y": 89
       },
       "id": 2,
       "panels": [],
@@ -1318,38 +1459,13 @@
           },
           "unit": "bps"
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "et-0/0/1"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 76
+        "y": 90
       },
       "id": 3,
       "options": {
@@ -1476,7 +1592,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 76
+        "y": 90
       },
       "id": 1,
       "options": {
@@ -1573,7 +1689,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 84
+        "y": 98
       },
       "id": 15,
       "options": {
@@ -1609,7 +1725,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 92
+        "y": 106
       },
       "id": 6,
       "panels": [],
@@ -1677,7 +1793,7 @@
         "h": 16,
         "w": 8,
         "x": 0,
-        "y": 93
+        "y": 107
       },
       "id": 25,
       "options": {
@@ -1851,7 +1967,7 @@
         "h": 8,
         "w": 16,
         "x": 8,
-        "y": 93
+        "y": 107
       },
       "id": 12,
       "options": {
@@ -1943,7 +2059,7 @@
         "h": 8,
         "w": 16,
         "x": 8,
-        "y": 101
+        "y": 115
       },
       "id": 11,
       "options": {
@@ -2036,7 +2152,7 @@
         "h": 14,
         "w": 24,
         "x": 0,
-        "y": 109
+        "y": 123
       },
       "id": 37,
       "options": {
@@ -2076,7 +2192,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 123
+        "y": 137
       },
       "id": 10,
       "panels": [],
@@ -2147,7 +2263,7 @@
         "h": 14,
         "w": 11,
         "x": 0,
-        "y": 124
+        "y": 138
       },
       "id": 27,
       "options": {
@@ -2239,7 +2355,7 @@
         "h": 14,
         "w": 13,
         "x": 11,
-        "y": 124
+        "y": 138
       },
       "id": 28,
       "options": {
@@ -2332,7 +2448,7 @@
         "h": 11,
         "w": 11,
         "x": 0,
-        "y": 138
+        "y": 152
       },
       "id": 30,
       "options": {
@@ -2424,7 +2540,7 @@
         "h": 11,
         "w": 13,
         "x": 11,
-        "y": 138
+        "y": 152
       },
       "id": 31,
       "options": {
@@ -2459,7 +2575,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 149
+        "y": 163
       },
       "id": 33,
       "panels": [],
@@ -2514,7 +2630,7 @@
         "h": 8,
         "w": 11,
         "x": 0,
-        "y": 150
+        "y": 164
       },
       "id": 32,
       "options": {
@@ -2596,7 +2712,7 @@
         "h": 8,
         "w": 10,
         "x": 11,
-        "y": 150
+        "y": 164
       },
       "id": 34,
       "options": {
@@ -2678,10 +2794,10 @@
         ]
       },
       "gridPos": {
-        "h": 6,
-        "w": 10,
+        "h": 4,
+        "w": 11,
         "x": 0,
-        "y": 158
+        "y": 172
       },
       "id": 35,
       "options": {
@@ -2697,7 +2813,7 @@
           "fields": "",
           "values": false
         },
-        "showPercentChange": true,
+        "showPercentChange": false,
         "textMode": "auto",
         "wideLayout": true
       },
@@ -2760,7 +2876,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 164
+        "y": 176
       },
       "id": 46,
       "panels": [],
@@ -2838,7 +2954,7 @@
         "h": 4,
         "w": 5,
         "x": 0,
-        "y": 165
+        "y": 177
       },
       "id": 42,
       "options": {
@@ -2912,7 +3028,7 @@
         "h": 4,
         "w": 19,
         "x": 5,
-        "y": 165
+        "y": 177
       },
       "id": 44,
       "options": {
@@ -3075,7 +3191,7 @@
         "h": 5,
         "w": 11,
         "x": 0,
-        "y": 169
+        "y": 181
       },
       "id": 45,
       "options": {
@@ -3203,20 +3319,8 @@
       {
         "allValue": "ALL",
         "current": {
-          "text": [
-            "1.0.0.12",
-            "1.0.0.13",
-            "1.0.0.14",
-            "1.0.0.15",
-            "1.0.0.2"
-          ],
-          "value": [
-            "1.0.0.12",
-            "1.0.0.13",
-            "1.0.0.14",
-            "1.0.0.15",
-            "1.0.0.2"
-          ]
+          "text": "All",
+          "value": "$__all"
         },
         "definition": "label_values(OSPF_Neighbors_adjacency_state,neighbor_id)",
         "includeAll": true,
@@ -3231,16 +3335,98 @@
         "refresh": 1,
         "regex": "",
         "type": "query"
+      },
+      {
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "loki",
+          "uid": "bex23bqh25blsd"
+        },
+        "definition": "",
+        "includeAll": true,
+        "multi": true,
+        "name": "app",
+        "options": [],
+        "query": {
+          "label": "app",
+          "refId": "LokiVariableQueryEditor-VariableQuery",
+          "stream": "",
+          "type": 1
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": [
+            "acx-lab1"
+          ],
+          "value": [
+            "acx-lab1"
+          ]
+        },
+        "datasource": {
+          "type": "loki",
+          "uid": "bex23bqh25blsd"
+        },
+        "definition": "",
+        "includeAll": true,
+        "multi": true,
+        "name": "host",
+        "options": [],
+        "query": {
+          "label": "host",
+          "refId": "LokiVariableQueryEditor-VariableQuery",
+          "stream": "",
+          "type": 1
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": [
+            "exit"
+          ],
+          "value": [
+            "exit"
+          ]
+        },
+        "datasource": {
+          "type": "loki",
+          "uid": "bex23bqh25blsd"
+        },
+        "definition": "",
+        "includeAll": true,
+        "multi": true,
+        "name": "command",
+        "options": [],
+        "query": {
+          "label": "command",
+          "refId": "LokiVariableQueryEditor-VariableQuery",
+          "stream": "",
+          "type": 1
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Juniper-gNMI",
   "uid": "9d990666-2396-4a65-b4ba-b8a20e7c6aef",
-  "version": 157
+  "version": 183
 }
