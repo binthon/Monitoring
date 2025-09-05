@@ -6,16 +6,55 @@ clients:
   - url: http://loki_acx7024:3100/loki/api/v1/push 
     tenant_id: acx7024
 
-positions:
-  filename: /tmp/positions.yaml
 
 scrape_configs:
-  - job_name: syslog_juniper
+  - job_name: syslog_juniper_tcp
     syslog:
       listen_address: 0.0.0.0:1514
       listen_protocol: tcp
       idle_timeout: 60s
-      label_structured_data: yes
+      label_structured_data: true
+      use_incoming_timestamp: true
+      labels:
+        source: juniper
+        device: acx7024
+    relabel_configs:
+      - source_labels: ['__syslog_message_hostname']
+        target_label: host
+      - source_labels: ['__syslog_message_app_name']
+        target_label: app
+      - source_labels: ['__syslog_message_proc_id']
+        target_label: pid
+      - source_labels: ['__syslog_message_severity']
+        target_label: severity
+      - source_labels: ['__syslog_message_facility']
+        target_label: facility
+    pipeline_stages:
+      - match:
+          selector: '{app="re0-mgd"}'
+          stages:
+            - regex:
+                expression: >
+                  .*User '(?P<user>[^']+)',\s*command\s+'(?P<command>[^']+)'
+            - regex:
+                expression: >
+                  .*User '(?P<user>[^']+)' requested '(?P<command>\w+)'
+            - regex:
+                source: command
+                expression: '(?P<command>\S(?:.*\S)?)'
+            - labels:
+                user:
+                command:
+
+### UDP TEST
+  - job_name: syslog_juniper_udp
+    syslog:
+      listen_address: 0.0.0.0:1514
+      listen_protocol: udp
+      idle_timeout: 60s
+      label_structured_data: true
+      use_incoming_timestamp: true
+      use_rfc5424_message: true
       labels:
         source: juniper
         device: acx7024
@@ -25,3 +64,9 @@ scrape_configs:
         target_label: host
       - source_labels: ['__syslog_message_app_name']
         target_label: app
+      - source_labels: ['__syslog_message_proc_id']
+        target_label: pid
+      - source_labels: ['__syslog_message_severity']
+        target_label: severity
+      - source_labels: ['__syslog_message_facility']
+        target_label: facility
